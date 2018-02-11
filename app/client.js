@@ -1,16 +1,23 @@
-import 'babel-polyfill'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider} from 'react-redux'
-import './config'
-import Routes from './routes'
-import configure from './store/configureStore'
+// import 'babel-polyfill'
+// import React from 'react'
+// import ReactDOM from 'react-dom'
+// import { Provider} from 'react-redux'
+// import './config'
+// import Routes from './routes'
+// import configure from './store/configureStore'
 
-const store = configure({ config: global.gconfig})
+// const store = configure({ config: global.gconfig})
 
-ReactDOM.render(
-	<Provider store={store}>
-		<Routes />
-	</Provider>,
-	document.getElementById('root'),
-)
+// ReactDOM.render(
+// 	<Provider store={store}>
+// 		<Routes />
+// 	</Provider>,
+// 	document.getElementById('root'),
+// )
+
+import sub from './sub'
+import './main.css'
+
+let p = document.createElement('p');
+p.innerHTML = "sub is" + sub(2,3);
+document.body.appendChild(p);

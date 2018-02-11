@@ -4,13 +4,13 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-function resove(relatedPath){
+function resolve(relatedPath){
 	return path.join(__dirname, relatedPath)
 }
 
 const webpackConfigBase = {
 	entry: {
-		client: resove('../app/client.js')
+		client: resolve('../app/client.js')
 	},
 	output: {
 		path: resolve('../dist'),
@@ -34,11 +34,11 @@ const webpackConfigBase = {
 				loader: 'babel',
 			},
 			{
-				test: /\.css/,
+				test: /\.css$/,
 				loader: ExtractTextPlugin.extract({
 					fallback: 'style',
 					use: [
-						{ loader: 'css', opitons: { sourceMap: true}}
+						{ loader: 'css', options: { sourceMap: true}}
 					]
 				}),
 			},
@@ -71,19 +71,19 @@ const webpackConfigBase = {
 		],
 	},
 	plugins: [
-		new ExtractTextPlugiin('style.[hash:4].css'),
+		new ExtractTextPlugin('style.[hash:4].css'),
 		new HtmlWebpackPlugin({
 			template: resolve('../app/index.html'),
 		}),
-		new webpack.optimize.CommosChunkPlugin({
+		new webpack.optimize.CommonsChunkPlugin({
 			name: 'client',
-			filename: 'conmmon.bundle.js',
+			filename: 'common.bundle.js',
 			minChunks: function(module, count) {
 				return module.resource && 
 					/\.js$/.test(module.resource) &&
 					module.resource.indexOf(resolve('../node_modules')) === 0
 			}
-		})，
+		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			async: 'async-common',
 			minChunks: 3,

@@ -9,7 +9,7 @@ function resolve(relatedPath){
 	return path.join(__dirname, relatedPath)
 }
 const webpackConfigDev = {
-	plugin: [
+	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('development'),
 			IS_DEVELOPMENT: true,
@@ -21,10 +21,12 @@ const webpackConfigDev = {
 	devtool: 'source-map',
 	devServer: {
 		contentBase: resolve('../app'),
-		historyApiFallack: false,
+		historyApiFallback: false,
 		hot: true,
-		inline: true,
-		host: '0.0.0.0',
+		inline: false,
+		// host: '0.0.0.0',
 		port: PORT,
 	},
 }
+
+module.exports = merge(webpackConfigBase, webpackConfigDev)
